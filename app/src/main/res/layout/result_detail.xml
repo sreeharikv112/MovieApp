@@ -1,0 +1,83 @@
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:layout_marginTop="@dimen/margin_10dp"
+tools:context="com.dev.movieapp.ui.fragments.detailfrag.ResultDetailFragment"
+    >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="@dimen/margin_10dp"
+    >
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/heart_icon"
+        android:textAlignment="viewStart"
+        android:textSize="@dimen/text_25"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="Title"
+        />
+
+    <TextView
+        android:id="@+id/votes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Votes"
+        android:textSize="@dimen/text_19"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/margin_10dp"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/heart_icon"
+        android:id="@+id/heart_icon"
+        android:layout_toLeftOf="@id/votes"
+        />
+
+</RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margin_10dp"
+    android:layout_marginRight="@dimen/margin_10dp"
+    >
+    <TextView
+        android:id="@+id/releaseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/darker_gray"
+        android:text="release"
+        android:textSize="@dimen/text_19"
+        android:layout_alignParentLeft="true"
+        />
+    <TextView
+        android:id="@+id/totalVotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="TotalVotes"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"/>
+</RelativeLayout>
+<TextView
+    android:id="@+id/result_detail"
+    android:layout_margin="@dimen/margin_10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Description"
+    android:textSize="@dimen/text_15"
+    android:textColor="@android:color/darker_gray"
+    />
+
+</LinearLayout>
