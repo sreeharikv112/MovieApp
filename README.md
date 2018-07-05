@@ -13,7 +13,3 @@ Screens </br>
 </br>
 Note:</br>
 Replace your API Key from api.themoviedb.org in app/build.gradle's API_KEY value
-
-"# MovieApp" 
-"# TheMovieDBApp" 
-"# MovieApp" 
