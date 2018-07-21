@@ -17,19 +17,22 @@ Replace your API Key from api.themoviedb.org in app/build.gradle's *API_KEY* val
 
 ### Tablet Screens <br>
 
-1)<br>
-![2capture](https://user-images.githubusercontent.com/39777674/43033802-567115a4-8cee-11e8-8d89-ca26f5804896.PNG)
-<br>
-2) <br>
-![3capture](https://user-images.githubusercontent.com/39777674/43033808-8334b776-8cee-11e8-8f5b-1789e2eee4a6.PNG)
-<br>
+1)<br><br>
+![cut1untitled](https://user-images.githubusercontent.com/39777674/43034468-99b97f8e-8cfa-11e8-9c10-9570537ca814.png)
+
+<br><br>
+2) <br><br>
+![cut2untitled](https://user-images.githubusercontent.com/39777674/43034473-af81eea0-8cfa-11e8-843e-8051f5699ba2.png)
+
+<br><br>
 ### Mobile Screens <br>
 
-1)<br>
-![screenshot_2018-05-31-18-49-13](https://user-images.githubusercontent.com/39777674/43033822-c236b898-8cee-11e8-8425-8e13715bbe2f.png)
-<br>
-2)<br> ![screenshot_2018-05-31-18-49-29](https://user-images.githubusercontent.com/39777674/43033828-d3d54416-8cee-11e8-885b-80ef33932348.png)
-<br>
-3) <br>
-![screenshot_2018-05-31-18-49-37](https://user-images.githubusercontent.com/39777674/43033832-e133c7ea-8cee-11e8-97eb-ab289451e94c.png)
-<br>
+1)<br><br>
+![1](https://user-images.githubusercontent.com/39777674/43034475-c3d76402-8cfa-11e8-86f8-f69d1e59ac4f.png)
+<br><br>
+2)<br><br>
+![2](https://user-images.githubusercontent.com/39777674/43034484-d422d800-8cfa-11e8-82c1-7b7283e4cb43.png)
+<br><br>
+3) <br><br>
+![3](https://user-images.githubusercontent.com/39777674/43034487-e18321bc-8cfa-11e8-9b24-50d9709e9f62.png)
+<br><br>
