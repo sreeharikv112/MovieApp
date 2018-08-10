@@ -1,6 +1,7 @@
 package com.dev.movieapp.ui.activities.landing;
 
 
+import com.dev.movieapp.models.ModelBase;
 import com.dev.movieapp.models.PopularMovies;
 import com.dev.movieapp.models.Result;
 import com.dev.movieapp.networking.NetError;
@@ -10,7 +11,7 @@ import com.dev.movieapp.networking.NetworkProcessor;
  * Presenter class for Main View with List items
  */
 
-public class ResultListPresenter implements NetworkProcessor.GetPopularMovieCallBack {
+public class ResultListPresenter implements NetworkProcessor.NetworkResponseCallBack {
 
     private final NetworkProcessor mNetworkProcessor;
     private final ResultListActivityView mView;
@@ -50,8 +51,9 @@ public class ResultListPresenter implements NetworkProcessor.GetPopularMovieCall
      * @param movieList
      */
     @Override
-    public void onSuccess(PopularMovies movieList) {
-        mView.getMovieList(movieList);
+    public void onSuccess(ModelBase movieList) {
+        PopularMovies popularMovies = (PopularMovies)movieList;
+        mView.getMovieList(popularMovies);
     }
 
     /**

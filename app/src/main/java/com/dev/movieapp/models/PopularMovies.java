@@ -1,5 +1,7 @@
 package com.dev.movieapp.models;
 
+import android.graphics.ColorSpace;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +11,7 @@ import java.util.List;
  * POJO class
  */
 
-public class PopularMovies {
+public class PopularMovies extends ModelBase{
 
     @SerializedName("page")
     @Expose

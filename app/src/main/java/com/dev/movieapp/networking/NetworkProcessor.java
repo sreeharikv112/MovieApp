@@ -3,6 +3,7 @@ package com.dev.movieapp.networking;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.dev.movieapp.models.ModelBase;
 import com.dev.movieapp.models.PopularMovies;
 import com.dev.movieapp.utils.AppUtils;
 import io.reactivex.Single;
@@ -35,7 +36,7 @@ public class NetworkProcessor {
      * @param page
      */
     @SuppressWarnings("unchecked")
-    public void getPopularList(final GetPopularMovieCallBack callback,String api_key,String lang,String page){
+    public void getPopularList(final NetworkResponseCallBack callback, String api_key, String lang, String page){
 
         Single singleResponse = mNetworkService.getPopularMovies(api_key,lang,page);
         singleResponse.subscribeOn(Schedulers.io())
@@ -69,8 +70,8 @@ public class NetworkProcessor {
      * Call backs for success and error scenarios
      */
     @SuppressWarnings("unchecked")
-    public interface GetPopularMovieCallBack{
-        void onSuccess(PopularMovies movieList);
+    public interface NetworkResponseCallBack {
+        void onSuccess(ModelBase movieList);
         void onError(NetError networkError);
     }
 }

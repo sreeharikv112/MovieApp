@@ -13,7 +13,7 @@ import java.util.List;
  * POJO class
  */
 
-public class Result implements Parcelable {
+public class Result extends ModelBase implements Parcelable  {
 
     @SerializedName("vote_count")
     @Expose
