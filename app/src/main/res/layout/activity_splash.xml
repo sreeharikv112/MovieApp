@@ -8,6 +8,7 @@
     tools:context="com.dev.movieapp.ui.activities.splash.SplashActivity">
 
     <ImageView
+        android:id="@+id/splashImageId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/imbd_main"

@@ -15,7 +15,7 @@ import java.io.File;
 public class MovieApp extends Application {
 
     private static MovieApp movieAppInstance;
-    NetworkComponent mNetworkComponent;
+    private NetworkComponent mNetworkComponent;
     private ContextComponent mContextComponent;
 
     @Override

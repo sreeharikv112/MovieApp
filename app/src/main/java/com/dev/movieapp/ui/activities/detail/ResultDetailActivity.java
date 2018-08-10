@@ -46,7 +46,11 @@ public class ResultDetailActivity extends BaseActivity implements ResultDetailVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mResult = getIntent().getExtras().getParcelable(AppUtils.RESULT_KEY);
+        try {
+            mResult = getIntent().getExtras().getParcelable(AppUtils.RESULT_KEY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         renderView();
         init();
 

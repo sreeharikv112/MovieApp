@@ -34,6 +34,7 @@ public class NetworkProcessor {
      * @param lang
      * @param page
      */
+    @SuppressWarnings("unchecked")
     public void getPopularList(final GetPopularMovieCallBack callback,String api_key,String lang,String page){
 
         Single singleResponse = mNetworkService.getPopularMovies(api_key,lang,page);
@@ -67,6 +68,7 @@ public class NetworkProcessor {
     /**
      * Call backs for success and error scenarios
      */
+    @SuppressWarnings("unchecked")
     public interface GetPopularMovieCallBack{
         void onSuccess(PopularMovies movieList);
         void onError(NetError networkError);

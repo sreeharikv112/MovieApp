@@ -18,12 +18,13 @@ public class SplashPresenter {
      */
     public SplashPresenter(SplashView splashView){
         mSplashView = splashView;
-        new Handler().postDelayed(new Runnable() {
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 postDelayAction();
             }
-        }, SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);*/
+        postDelayAction();
     }
 
     /**
