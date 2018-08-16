@@ -58,4 +58,14 @@ public class ResultDetailPresenterTest {
 
         verify(resultDetailView, atLeastOnce()).populateUI(result);
     }
+
+    @Test
+    public void testDetach(){
+        ResultDetailPresenter resultDetailPresenter = new ResultDetailPresenter(result);
+        resultDetailPresenter.attach(resultDetailView);
+        assertNotNull(resultDetailPresenter.mResultDetailView);
+
+        resultDetailPresenter.detach();
+        assertNull(resultDetailPresenter.mResultDetailView);
+    }
 }

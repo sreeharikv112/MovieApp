@@ -12,7 +12,7 @@ public class SplashPresenter implements BasePresenter<SplashView>{
 
     // Splash screen timer
     private final int SPLASH_TIME_OUT = 1000;
-    private SplashView mSplashView;
+    protected SplashView mSplashView;
 
     /**
      * Constructor for Presenter
