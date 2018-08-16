@@ -1,31 +1,42 @@
 package com.dev.movieapp.ui.activities.detail;
 
 import com.dev.movieapp.models.Result;
+import com.dev.movieapp.ui.uiinterfaces.BasePresenter;
 
 /**
  * Class representing Presenter for Detail view
  */
 
-public class ResultDetailPresenter {
+public class ResultDetailPresenter implements BasePresenter<ResultDetailView> {
 
     Result mResult;
     ResultDetailView mResultDetailView;
 
+    public ResultDetailView getResultDetailView() {
+        return mResultDetailView;
+    }
+
     /**
      * Constructor for Presenter
      * @param result
-     * @param resultDetailView
      */
-    public ResultDetailPresenter(Result result,ResultDetailView resultDetailView){
+    public ResultDetailPresenter(Result result){
         mResult = result;
-        mResultDetailView = resultDetailView;
+    }
 
+    public void attach(ResultDetailView resultDetailView){
+        mResultDetailView = resultDetailView;
     }
 
     /**
      * Refreshes UI with data
      */
     public void refreshUI(){
-        mResultDetailView.populateUI(mResult);
+
+        getResultDetailView().populateUI(mResult);
+    }
+
+    public void detach(){
+        mResultDetailView=null;
     }
 }

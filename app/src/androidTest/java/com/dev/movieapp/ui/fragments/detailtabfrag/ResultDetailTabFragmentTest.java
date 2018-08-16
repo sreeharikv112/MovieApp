@@ -1,4 +1,4 @@
-package com.dev.movieapp.ui.fragments.detailfrag;
+package com.dev.movieapp.ui.fragments.detailtabfrag;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,17 +17,23 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static java.lang.Boolean.FALSE;
+import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
-public class ResultDetailFragmentTest {
+
+public class ResultDetailTabFragmentTest {
+
 
     public final Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+
     @Rule
     public final ActivityTestRule<ResultDetailActivity> detailActivityTestRule =
             new ActivityTestRule<ResultDetailActivity>(ResultDetailActivity.class,true,true){
@@ -55,7 +61,7 @@ public class ResultDetailFragmentTest {
             };
 
     @Test
-    public void testUIElements(){
+    public void testPopulateUI(){
         onView(withId(R.id.title)).check(matches(withText("Avengers Marvel")));
         onView(withId(R.id.result_detail)).check(matches(withText("Movie Description")));
         onView(withId(R.id.votes)).check(matches(withText("4.2"+ " "+targetContext.getString(R.string.percentage))));

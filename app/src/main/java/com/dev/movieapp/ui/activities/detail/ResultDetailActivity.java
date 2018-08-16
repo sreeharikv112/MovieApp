@@ -89,7 +89,8 @@ public class ResultDetailActivity extends BaseActivity implements ResultDetailVi
         }
         ResultDetailView detailView=this;
         // Initiate Presenter to manage data
-        mResultDetailPresenter=new ResultDetailPresenter(mResult,detailView);
+        mResultDetailPresenter=new ResultDetailPresenter(mResult);
+        mResultDetailPresenter.attach(detailView);
         mResultDetailPresenter.refreshUI();
     }
 
@@ -117,5 +118,11 @@ public class ResultDetailActivity extends BaseActivity implements ResultDetailVi
             images.append(result.getBackdropPath());
             loadImage(images.toString(),mImageParallax);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        mResultDetailPresenter.detach();
+        super.onDestroy();
     }
 }

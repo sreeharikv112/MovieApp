@@ -15,12 +15,18 @@ import com.dev.movieapp.utils.AppUtils;
  */
 public class SplashActivity extends BaseActivity implements SplashView {
 
+    SplashPresenter splashPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         renderView();
-        SplashPresenter splashPresenter=new SplashPresenter(this);
+        splashPresenter=new SplashPresenter();
+        splashPresenter.attach(this);
+        splashPresenter.delayedAction();
     }
+
+
 
     /**
      * Sets activity content
@@ -68,5 +74,11 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @Override
     public void handlePositiveAlertCallBack() {
         checkNetwork();
+    }
+
+    @Override
+    protected void onDestroy() {
+        splashPresenter.detach();
+        super.onDestroy();
     }
 }

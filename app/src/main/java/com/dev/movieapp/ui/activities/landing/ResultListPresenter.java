@@ -6,24 +6,23 @@ import com.dev.movieapp.models.PopularMovies;
 import com.dev.movieapp.models.Result;
 import com.dev.movieapp.networking.NetError;
 import com.dev.movieapp.networking.NetworkProcessor;
+import com.dev.movieapp.ui.uiinterfaces.BasePresenter;
 
 /**
  * Presenter class for Main View with List items
  */
 
-public class ResultListPresenter implements NetworkProcessor.NetworkResponseCallBack {
+public class ResultListPresenter implements NetworkProcessor.NetworkResponseCallBack , BasePresenter<ResultListActivityView>{
 
     private final NetworkProcessor mNetworkProcessor;
-    private final ResultListActivityView mView;
+    private ResultListActivityView mView;
 
     /**
      * Constructor for Presenter
      * @param networkProcessor
-     * @param mainView
      */
-    public ResultListPresenter(NetworkProcessor networkProcessor, ResultListActivityView mainView){
+    public ResultListPresenter(NetworkProcessor networkProcessor){
         this.mNetworkProcessor = networkProcessor;
-        mView=mainView;
     }
 
     /**
@@ -63,5 +62,15 @@ public class ResultListPresenter implements NetworkProcessor.NetworkResponseCall
     @Override
     public void onError(NetError networkError) {
         mView.onFailure(networkError.errorMsg);
+    }
+
+    @Override
+    public void attach(ResultListActivityView view) {
+        mView=view;
+    }
+
+    @Override
+    public void detach() {
+        mView=null;
     }
 }

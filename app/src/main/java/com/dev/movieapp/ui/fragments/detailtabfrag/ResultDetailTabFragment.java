@@ -4,6 +4,7 @@ package com.dev.movieapp.ui.fragments.detailtabfrag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,12 @@ import com.dev.movieapp.BuildConfig;
 import com.dev.movieapp.R;
 import com.dev.movieapp.models.Result;
 import com.dev.movieapp.ui.fragments.BaseFrag;
+import com.dev.movieapp.ui.fragments.detailfrag.ResultDetailFragment;
 import com.dev.movieapp.utils.AppUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,7 +63,8 @@ public class ResultDetailTabFragment extends BaseFrag implements ResultDetailTab
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
         mResult = bundle.getParcelable(AppUtils.RESULT_KEY);
-        mResultDetailTabPresenter=new ResultDetailTabPresenter(mResult,this);
+        mResultDetailTabPresenter=new ResultDetailTabPresenter(mResult);
+        mResultDetailTabPresenter.attach(this);
     }
 
     @Override
@@ -81,7 +88,8 @@ public class ResultDetailTabFragment extends BaseFrag implements ResultDetailTab
         mVotes.setText(result.getVoteAverage() + " "+getString(R.string.percentage));
         mTotalVotes.setText(result.getVoteCount() + " "+getString(R.string.votes));
         mDescription.setText(result.getOverview());
-        mReleaseDate.setText(getString(R.string.release)+" : " + result.getReleaseDate());
+        AppUtils appUtils=new AppUtils();
+        mReleaseDate.setText(getString(R.string.release)+" : " + appUtils.getFormattedDate(result.getReleaseDate()));
 
         //Created URL for image population with Glide
         StringBuilder images = new StringBuilder();
@@ -92,7 +100,8 @@ public class ResultDetailTabFragment extends BaseFrag implements ResultDetailTab
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        mResultDetailTabPresenter.detach();
         mUnbinder.unbind();
+        super.onDestroy();
     }
 }

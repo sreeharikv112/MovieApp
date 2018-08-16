@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,10 @@ import com.dev.movieapp.ui.activities.detail.ResultDetailActivity;
 import com.dev.movieapp.ui.activities.landing.ResultListActivity;
 import com.dev.movieapp.ui.fragments.BaseFrag;
 import com.dev.movieapp.utils.AppUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,7 +64,8 @@ public class ResultDetailFragment extends BaseFrag implements ResultDetailView {
         Bundle bundle = this.getArguments();
         mResult = bundle.getParcelable(AppUtils.RESULT_KEY);
         //Initiates Presenter object
-        mResultDetailPresenter=new ResultDetailPresenter(mResult,this);
+        mResultDetailPresenter=new ResultDetailPresenter(mResult);
+        mResultDetailPresenter.attach(this);
     }
 
     @Override
@@ -81,12 +87,14 @@ public class ResultDetailFragment extends BaseFrag implements ResultDetailView {
         mVotes.setText(result.getVoteAverage() + " "+getString(R.string.percentage));
         mTotalVotes.setText(result.getVoteCount() + " "+getString(R.string.votes));
         mDescription.setText(result.getOverview());
-        mReleaseDate.setText(getString(R.string.release)+" : " + result.getReleaseDate());
+        AppUtils appUtils = new AppUtils();
+        mReleaseDate.setText(getString(R.string.release)+" : " + appUtils.getFormattedDate(result.getReleaseDate()));
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         mUnbinder.unbind();
+        mResultDetailPresenter.detach();
+        super.onDestroy();
     }
 }

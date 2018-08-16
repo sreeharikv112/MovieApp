@@ -55,7 +55,8 @@ public class ResultListActivity extends BaseActivity implements ResultListActivi
         MovieApp.getInstance().getNetworkComponent().inject(this);
         renderView();
         init();
-        mPresenter =new ResultListPresenter(mNetworkProcessor,this);
+        mPresenter =new ResultListPresenter(mNetworkProcessor);
+        mPresenter.attach(this);
 
         if (findViewById(R.id.result_detail_container) != null) {
             // The detail container view will be present only in the
@@ -141,5 +142,11 @@ public class ResultListActivity extends BaseActivity implements ResultListActivi
             intent.putExtra(AppUtils.RESULT_KEY,result);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.detach();
+        super.onDestroy();
     }
 }

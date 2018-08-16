@@ -3,9 +3,15 @@ package com.dev.movieapp.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import com.dev.movieapp.BuildConfig;
 import com.dev.movieapp.app.MovieApp;
+import com.dev.movieapp.ui.fragments.detailfrag.ResultDetailFragment;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -42,4 +48,23 @@ public class AppUtils {
         return status;
     }
 
+    /**
+     * Returns formatted date
+     * @param inputDate
+     * @return
+     */
+    public String getFormattedDate(String inputDate){
+        //2018-06-06
+        String date="";
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date newDate = format.parse(inputDate);
+
+            format = new SimpleDateFormat("dd MMM yyyy");
+            date = format.format(newDate);
+        } catch (ParseException e) {
+            Log.e(ResultDetailFragment.class.getSimpleName(),"Date ParseException = "+e.toString());
+        }
+        return date;
+    }
 }

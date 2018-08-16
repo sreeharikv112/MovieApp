@@ -8,5 +8,5 @@ import com.dev.movieapp.models.Result;
 
 public interface ResultDetailView {
 
-    void populateUI(Result result);
+    public void populateUI(Result result);
 }

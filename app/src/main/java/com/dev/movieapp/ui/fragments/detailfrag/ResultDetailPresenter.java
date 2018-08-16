@@ -2,12 +2,13 @@ package com.dev.movieapp.ui.fragments.detailfrag;
 
 import com.dev.movieapp.models.Result;
 import com.dev.movieapp.ui.fragments.detailfrag.*;
+import com.dev.movieapp.ui.uiinterfaces.BasePresenter;
 
 /**
  * Presenter class for Detail Fragment
  */
 
-public class ResultDetailPresenter {
+public class ResultDetailPresenter implements BasePresenter<ResultDetailView >{
 
     private Result result;
     private ResultDetailView resultDetailView;
@@ -15,11 +16,9 @@ public class ResultDetailPresenter {
     /**
      * Constructor for Presenter
      * @param result
-     * @param resultDetailView
      */
-    public ResultDetailPresenter(Result result, ResultDetailView resultDetailView){
+    public ResultDetailPresenter(Result result){
         this.result = result;
-        this.resultDetailView = resultDetailView;
     }
 
     /**
@@ -27,5 +26,15 @@ public class ResultDetailPresenter {
      */
     public void refreshUI(){
         resultDetailView.populateUI(result);
+    }
+
+    @Override
+    public void attach(ResultDetailView view) {
+        this.resultDetailView = view;
+    }
+
+    @Override
+    public void detach() {
+        resultDetailView=null;
     }
 }

@@ -23,6 +23,10 @@ android {
     }
 
     buildToolsVersion '27.0.3'
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
 }
 
 dependencies {
@@ -36,11 +40,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
-
-    androidTestImplementation 'org.mockito:mockito-core:2.4.0'
-    androidTestImplementation "org.assertj:assertj-core:1.7.0"
-    testImplementation "org.robolectric:robolectric:3.8"
-
+    androidTestImplementation 'org.mockito:mockito-android:2.21.0'
 
     //UI
     api 'com.github.bumptech.glide:glide:4.7.1'
@@ -52,9 +52,11 @@ dependencies {
     api 'com.android.support:support-annotations:27.1.1'
     api 'com.android.support:support-compat:27.1.1'
     api 'com.android.support:support-core-ui:27.1.1'
+
     //Dagger 2
     api 'com.google.dagger:dagger:2.16'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
+
     //Retrofit , RxJava Dependencies
     api 'com.squareup.retrofit2:retrofit:2.3.0'
     api 'com.squareup.okhttp3:okhttp:3.10.0'
