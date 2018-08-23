@@ -1,6 +1,7 @@
 package com.dev.movieapp.app;
 
 import android.app.Application;
+import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.content.res.Configuration;
 
 import com.dev.movieapp.dipinject.components.ApplicationComponent;
@@ -14,11 +15,14 @@ public class MovieApp extends Application {
 
     private ApplicationComponent mApplicationComponent;
     private File mCacheFile;
+    private boolean isAppActive;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mCacheFile = new File(getCacheDir(), "popular_movie_response");
+
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(new AppEventsListener(this));
     }
 
     public ApplicationComponent getApplicationComponent() {
@@ -45,4 +49,13 @@ public class MovieApp extends Application {
     public void onTerminate() {
         super.onTerminate();
     }
+
+    public boolean isAppActive() {
+        return isAppActive;
+    }
+
+    public void setAppActive(boolean appActive) {
+        isAppActive = appActive;
+    }
+
 }
