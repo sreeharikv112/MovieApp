@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.dev.movieapp.R;
-import com.dev.movieapp.ui.activities.landing.ResultListActivity;
 import com.dev.movieapp.ui.activities.BaseActivity;
+import com.dev.movieapp.ui.activities.landing.ResultListActivity;
 import com.dev.movieapp.utils.AppUtils;
+
+import javax.inject.Inject;
 
 /**
  * Splash Activity
@@ -16,17 +18,18 @@ import com.dev.movieapp.utils.AppUtils;
 public class SplashActivity extends BaseActivity implements SplashView {
 
     SplashPresenter splashPresenter;
+    @Inject
+    AppUtils mAppUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getInjectionComponent().inject(this);
         super.onCreate(savedInstanceState);
         renderView();
-        splashPresenter=new SplashPresenter();
+        splashPresenter = new SplashPresenter();
         splashPresenter.attach(this);
         splashPresenter.delayedAction();
     }
-
-
 
     /**
      * Sets activity content
@@ -48,10 +51,10 @@ public class SplashActivity extends BaseActivity implements SplashView {
      */
     @Override
     public void checkNetwork() {
-        if(!new AppUtils().isNetworkConnected()){
-            showMessage(getString(R.string.network_error),R.string.retry,R.string.exit);
+        if (!mAppUtils.isNetworkConnected()) {
+            showMessage(getString(R.string.network_error), R.string.retry, R.string.exit);
             return;
-        }else{
+        } else {
             navigateToLanding();
         }
     }
@@ -61,7 +64,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
      */
     @Override
     public void navigateToLanding() {
-        Intent intent= new Intent(this,ResultListActivity.class);
+        Intent intent = new Intent(this, ResultListActivity.class);
         startActivity(intent);
         finish();
     }

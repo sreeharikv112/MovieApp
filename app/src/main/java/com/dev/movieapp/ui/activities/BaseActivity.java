@@ -13,7 +13,12 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.dev.movieapp.R;
+import com.dev.movieapp.app.MovieApp;
+import com.dev.movieapp.dipinject.components.InjectionSubComponent;
+import com.dev.movieapp.dipinject.modules.NetworkModule;
 import com.dev.movieapp.ui.uiinterfaces.AlertCallBack;
+
+import java.io.File;
 
 
 /**
@@ -24,11 +29,25 @@ import com.dev.movieapp.ui.uiinterfaces.AlertCallBack;
  */
 public abstract class BaseActivity extends AppCompatActivity implements AlertCallBack {
 
+    private boolean mIsInjectionComponentUsed = false;
+
     protected AlertDialog mCallBackAlertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    protected InjectionSubComponent getInjectionComponent(){
+
+        if (mIsInjectionComponentUsed) {
+            throw new IllegalStateException("should not use Injection more than once.");
+        }
+        mIsInjectionComponentUsed=true;
+        return ((MovieApp)getApplication())
+                .getApplicationComponent()
+                .newInjectionComponent();
+    }
+
     public abstract void renderView();
 
     public abstract void init();

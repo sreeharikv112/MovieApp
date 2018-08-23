@@ -2,24 +2,18 @@ package com.dev.movieapp.ui.activities.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.View;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dev.movieapp.BuildConfig;
 import com.dev.movieapp.R;
 import com.dev.movieapp.models.Result;
 import com.dev.movieapp.ui.activities.BaseActivity;
-import com.dev.movieapp.ui.fragments.detailfrag.ResultDetailFragment;
 import com.dev.movieapp.ui.activities.landing.ResultListActivity;
+import com.dev.movieapp.ui.fragments.detailfrag.ResultDetailFragment;
 import com.dev.movieapp.utils.AppUtils;
 
 import butterknife.BindView;
@@ -63,7 +57,7 @@ public class ResultDetailActivity extends BaseActivity implements ResultDetailVi
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putParcelable(AppUtils.RESULT_KEY,mResult);
+            arguments.putParcelable(AppUtils.RESULT_KEY, mResult);
 
             ResultDetailFragment fragment = new ResultDetailFragment();
             fragment.setArguments(arguments);
@@ -87,9 +81,9 @@ public class ResultDetailActivity extends BaseActivity implements ResultDetailVi
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ResultDetailView detailView=this;
+        ResultDetailView detailView = this;
         // Initiate Presenter to manage data
-        mResultDetailPresenter=new ResultDetailPresenter(mResult);
+        mResultDetailPresenter = new ResultDetailPresenter(mResult);
         mResultDetailPresenter.attach(detailView);
         mResultDetailPresenter.refreshUI();
     }
@@ -108,15 +102,16 @@ public class ResultDetailActivity extends BaseActivity implements ResultDetailVi
 
     /**
      * Refreshes UI with data
+     *
      * @param result
      */
     @Override
     public void populateUI(Result result) {
-        if(!TextUtils.isEmpty(result.getBackdropPath())) {
+        if (!TextUtils.isEmpty(result.getBackdropPath())) {
             StringBuilder images = new StringBuilder();
             images.append(BuildConfig.IMG_BASE_URL + AppUtils.IMG_URL_EXTRA);
             images.append(result.getBackdropPath());
-            loadImage(images.toString(),mImageParallax);
+            loadImage(images.toString(), mImageParallax);
         }
     }
 

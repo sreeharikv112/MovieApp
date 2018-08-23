@@ -1,8 +1,10 @@
-package com.dev.movieapp.modules;
+package com.dev.movieapp.dipinject.modules;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.dev.movieapp.BuildConfig;
+import com.dev.movieapp.dipinject.customscopes.ApplicationScope;
 import com.dev.movieapp.networking.NetworkProcessor;
 import com.dev.movieapp.networking.NetworkService;
 import com.dev.movieapp.utils.AppUtils;
@@ -14,8 +16,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
@@ -23,7 +23,6 @@ import okhttp3.CipherSuite;
 import okhttp3.ConnectionSpec;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.TlsVersion;
 import retrofit2.Retrofit;
@@ -37,18 +36,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkModule {
 
     private File mCacheFile;
+    private Context mContext;
 
     /**
      * Constructor for NetworkModule
+     *
      * @param cacheFile
      */
-    public NetworkModule(File cacheFile) {
+    public NetworkModule(File cacheFile, Context context) {
         this.mCacheFile = cacheFile;
+        mContext = context;
     }
 
     @Provides
-    @Singleton
-    Retrofit provideCall(){
+    @ApplicationScope
+    Retrofit provideCall() {
 
         //Sets up default cache with 10 MB
         Cache cache = null;
@@ -56,7 +58,7 @@ public class NetworkModule {
         try {
             cache = new Cache(mCacheFile, cacheSize);
         } catch (Exception e) {
-            Log.e("TAG","Cache create error "+e.toString());
+            Log.e("TAG", "Cache create error " + e.toString());
         }
 
         ConnectionSpec spec = new
@@ -72,42 +74,42 @@ public class NetworkModule {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(cache_interceptor)
                 .cache(cache)
-                .connectTimeout(AppUtils.TIME_OUT , TimeUnit.SECONDS)
-                .readTimeout(AppUtils.TIME_OUT , TimeUnit.SECONDS)
+                .connectTimeout(AppUtils.TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(AppUtils.TIME_OUT, TimeUnit.SECONDS)
                 .connectionSpecs(Collections.singletonList(spec))
                 .build();
 
-            // RxJava2 service call support
-            // Sets OkHttpClient
-            // Sets Gson converter
+        // RxJava2 service call support
+        // Sets OkHttpClient
+        // Sets Gson converter
         Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .addConverterFactory(providesGsonConverterFactory())
                 .baseUrl(BuildConfig.BASE_URL).build();
-            return retrofit;
+        return retrofit;
 
     }
 
     @Provides
-    @Singleton
+    @ApplicationScope
     @SuppressWarnings("unused")
     public NetworkService providesNetworkService(Retrofit retrofit) {
         return retrofit.create(NetworkService.class);
     }
 
     @Provides
-    @Singleton
+    @ApplicationScope
     @SuppressWarnings("unused")
-    public NetworkProcessor providesService(
-            NetworkService networkService) {
+    public NetworkProcessor providesService(NetworkService networkService) {
         return new NetworkProcessor(networkService);
     }
 
-    private static final Interceptor cache_interceptor = new Interceptor() {
-        @Override public Response intercept(Chain chain) throws IOException {
+    private final Interceptor cache_interceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
             Response originalResponse = chain.proceed(chain.request());
-            if (new AppUtils().isNetworkConnected()) {
+            if (new AppUtils(mContext).isNetworkConnected()) {
                 int maxAge = 60; // read from cache for 1 minute
                 return originalResponse.newBuilder()
                         .header("Cache-Control", "public, max-age=" + maxAge)
@@ -118,7 +120,8 @@ public class NetworkModule {
                         .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                         .build();
             }
-        }};
+        }
+    };
 
     private GsonConverterFactory providesGsonConverterFactory() {
         GsonBuilder gsonBuilder = new GsonBuilder();

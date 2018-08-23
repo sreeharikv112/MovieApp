@@ -11,4 +11,5 @@
     <string name="cancel">Cancel</string>
     <string name="no_data">Could not find movie data</string>
     <string name="error_processing_response">Error in getting response</string>
+    <string name="ok">OK</string>
 </resources>

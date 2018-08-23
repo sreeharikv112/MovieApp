@@ -1,11 +1,8 @@
 package com.dev.movieapp.ui.fragments.detailfrag;
 
-import android.app.Activity;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +15,10 @@ import com.dev.movieapp.ui.activities.landing.ResultListActivity;
 import com.dev.movieapp.ui.fragments.BaseFrag;
 import com.dev.movieapp.utils.AppUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Optional;
 import butterknife.Unbinder;
 
 /**
@@ -49,8 +43,12 @@ public class ResultDetailFragment extends BaseFrag implements ResultDetailView {
     @BindView(R.id.result_detail)
     TextView mDescription;
     @BindView(R.id.toolbar_layout)
-    @Nullable CollapsingToolbarLayout mAppBarLayout;
+    @Nullable
+    CollapsingToolbarLayout mAppBarLayout;
     ResultDetailPresenter mResultDetailPresenter;
+    @Inject
+    AppUtils mAppUtils;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -60,11 +58,12 @@ public class ResultDetailFragment extends BaseFrag implements ResultDetailView {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        getInjectionComponent().inject(this);
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
         mResult = bundle.getParcelable(AppUtils.RESULT_KEY);
         //Initiates Presenter object
-        mResultDetailPresenter=new ResultDetailPresenter(mResult);
+        mResultDetailPresenter = new ResultDetailPresenter(mResult);
         mResultDetailPresenter.attach(this);
     }
 
@@ -72,23 +71,23 @@ public class ResultDetailFragment extends BaseFrag implements ResultDetailView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.result_detail, container, false);
-        mUnbinder= ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
         mResultDetailPresenter.refreshUI();
         return rootView;
     }
 
     /**
      * Repopulates UI
+     *
      * @param result
      */
     @Override
     public void populateUI(Result result) {
         mTitle.setText(result.getTitle());
-        mVotes.setText(result.getVoteAverage() + " "+getString(R.string.percentage));
-        mTotalVotes.setText(result.getVoteCount() + " "+getString(R.string.votes));
+        mVotes.setText(result.getVoteAverage() + " " + getString(R.string.percentage));
+        mTotalVotes.setText(result.getVoteCount() + " " + getString(R.string.votes));
         mDescription.setText(result.getOverview());
-        AppUtils appUtils = new AppUtils();
-        mReleaseDate.setText(getString(R.string.release)+" : " + appUtils.getFormattedDate(result.getReleaseDate()));
+        mReleaseDate.setText(getString(R.string.release) + " : " + mAppUtils.getFormattedDate(result.getReleaseDate()));
     }
 
     @Override

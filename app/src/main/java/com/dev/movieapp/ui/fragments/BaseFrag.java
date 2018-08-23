@@ -13,6 +13,8 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.dev.movieapp.R;
+import com.dev.movieapp.app.MovieApp;
+import com.dev.movieapp.dipinject.components.InjectionSubComponent;
 import com.dev.movieapp.ui.uiinterfaces.AlertCallBack;
 
 /**
@@ -24,33 +26,45 @@ import com.dev.movieapp.ui.uiinterfaces.AlertCallBack;
 
 public abstract class BaseFrag extends Fragment implements AlertCallBack {
 
+    private boolean mIsInjectionComponentUsed = false;
     protected AlertDialog mCallBackAlertDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
-    protected void loadImage(String imagePath, ImageView imageView){
+    protected InjectionSubComponent getInjectionComponent() {
+
+        if (mIsInjectionComponentUsed) {
+            throw new IllegalStateException("should not use Injection more than once.");
+        }
+        mIsInjectionComponentUsed = true;
+        return ((MovieApp) getActivity().getApplication())
+                .getApplicationComponent()
+                .newInjectionComponent();
+    }
+
+    protected void loadImage(String imagePath, ImageView imageView) {
         RequestOptions requestOptions = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.imdb_icon)
                 .error(R.mipmap.image_error)
-                .priority(Priority.NORMAL)
-                ;
+                .priority(Priority.NORMAL);
         RequestBuilder<Drawable> requestBuilder = Glide.with(this)
                 .load(imagePath);
         requestBuilder.apply(requestOptions)
                 .into(imageView);
     }
+
     /**
      * Show alert message with call back
-     * @param message message to show in alert
+     *
+     * @param message         message to show in alert
      * @param positiveBtnText positive button text
      * @param negativeBtnText negative button text
      */
-    void showMessage(String message,int positiveBtnText,int negativeBtnText){
+    void showMessage(String message, int positiveBtnText, int negativeBtnText) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         dialogBuilder.setMessage(message);
 
