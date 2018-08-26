@@ -14,10 +14,12 @@ import com.dev.movieapp.models.Result;
 import com.dev.movieapp.ui.activities.BaseActivity;
 import com.dev.movieapp.ui.activities.landing.ResultListActivity;
 import com.dev.movieapp.ui.fragments.detailfrag.ResultDetailFragment;
-import com.dev.movieapp.utils.AppUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.dev.movieapp.utils.AppConstants.IMG_URL_EXTRA;
+import static com.dev.movieapp.utils.AppConstants.RESULT_KEY;
 
 /**
  * An activity representing a single Result detail screen. This
@@ -41,7 +43,7 @@ public class ResultDetailActivity extends BaseActivity implements ResultDetailVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            mResult = getIntent().getExtras().getParcelable(AppUtils.RESULT_KEY);
+            mResult = getIntent().getExtras().getParcelable(RESULT_KEY);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,7 +59,7 @@ public class ResultDetailActivity extends BaseActivity implements ResultDetailVi
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putParcelable(AppUtils.RESULT_KEY, mResult);
+            arguments.putParcelable(RESULT_KEY, mResult);
 
             ResultDetailFragment fragment = new ResultDetailFragment();
             fragment.setArguments(arguments);
@@ -109,7 +111,7 @@ public class ResultDetailActivity extends BaseActivity implements ResultDetailVi
     public void populateUI(Result result) {
         if (!TextUtils.isEmpty(result.getBackdropPath())) {
             StringBuilder images = new StringBuilder();
-            images.append(BuildConfig.IMG_BASE_URL + AppUtils.IMG_URL_EXTRA);
+            images.append(BuildConfig.IMG_BASE_URL + IMG_URL_EXTRA);
             images.append(result.getBackdropPath());
             loadImage(images.toString(), mImageParallax);
         }

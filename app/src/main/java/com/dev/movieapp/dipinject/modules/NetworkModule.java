@@ -28,6 +28,8 @@ import okhttp3.TlsVersion;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.dev.movieapp.utils.AppConstants.TIME_OUT;
+
 /**
  * Dagger Module for Networking
  */
@@ -74,8 +76,8 @@ public class NetworkModule {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(cache_interceptor)
                 .cache(cache)
-                .connectTimeout(AppUtils.TIME_OUT, TimeUnit.SECONDS)
-                .readTimeout(AppUtils.TIME_OUT, TimeUnit.SECONDS)
+                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .connectionSpecs(Collections.singletonList(spec))
                 .build();
 

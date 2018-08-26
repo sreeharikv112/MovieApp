@@ -4,6 +4,8 @@ import com.dev.movieapp.ui.activities.landing.ResultListActivity;
 import com.dev.movieapp.ui.activities.splash.SplashActivity;
 import com.dev.movieapp.ui.fragments.detailfrag.ResultDetailFragment;
 import com.dev.movieapp.ui.fragments.detailtabfrag.ResultDetailTabFragment;
+import com.dev.movieapp.ui.fragments.splash.SplashFragment;
+import com.dev.movieapp.ui.fragments.splash.SplashPresenter;
 
 import dagger.Subcomponent;
 
@@ -14,8 +16,10 @@ public interface InjectionSubComponent {
 
     void inject(ResultDetailFragment fragment);
 
-    void inject(SplashActivity activity);
+    /*void inject(SplashActivity activity);*/
 
     void inject(ResultDetailTabFragment fragment);
+
+    void inject(SplashFragment fragment);
 
 }

@@ -25,6 +25,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.dev.movieapp.utils.AppConstants.RESULT_KEY;
+
 /**
  * An activity representing a list of Results. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -133,7 +135,7 @@ public class ResultListActivity extends BaseActivity implements ResultListActivi
     public void pushDetailView(Result result) {
         if (mTwoPane) {
             Bundle arguments = new Bundle();
-            arguments.putParcelable(AppUtils.RESULT_KEY, result);
+            arguments.putParcelable(RESULT_KEY, result);
             ResultDetailTabFragment fragment = new ResultDetailTabFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -141,7 +143,7 @@ public class ResultListActivity extends BaseActivity implements ResultListActivi
                     .commit();
         } else {
             Intent intent = new Intent(this, ResultDetailActivity.class);
-            intent.putExtra(AppUtils.RESULT_KEY, result);
+            intent.putExtra(RESULT_KEY, result);
             startActivity(intent);
         }
     }

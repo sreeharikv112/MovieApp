@@ -3,28 +3,18 @@ package com.dev.movieapp.ui.fragments.detailtabfrag;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dev.movieapp.BuildConfig;
 import com.dev.movieapp.R;
 import com.dev.movieapp.models.Result;
 import com.dev.movieapp.ui.fragments.BaseFrag;
-import com.dev.movieapp.ui.fragments.detailfrag.ResultDetailFragment;
 import com.dev.movieapp.utils.AppLogger;
 import com.dev.movieapp.utils.AppUtils;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -32,11 +22,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static com.dev.movieapp.utils.AppConstants.IMG_URL_EXTRA;
+import static com.dev.movieapp.utils.AppConstants.RESULT_KEY;
+
 /**
  * Fragment class for Tablet Detailed view
- *
  */
-public class ResultDetailTabFragment extends BaseFrag implements ResultDetailTabView{
+public class ResultDetailTabFragment extends BaseFrag implements ResultDetailTabView {
 
     private static final String TAG = ResultDetailTabFragment.class.getSimpleName();
     private Result mResult;
@@ -74,8 +66,8 @@ public class ResultDetailTabFragment extends BaseFrag implements ResultDetailTab
         getInjectionComponent().inject(this);
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
-        mResult = bundle.getParcelable(AppUtils.RESULT_KEY);
-        mResultDetailTabPresenter=new ResultDetailTabPresenter(mResult);
+        mResult = bundle.getParcelable(RESULT_KEY);
+        mResultDetailTabPresenter = new ResultDetailTabPresenter(mResult);
         mResultDetailTabPresenter.attach(this);
     }
 
@@ -83,8 +75,8 @@ public class ResultDetailTabFragment extends BaseFrag implements ResultDetailTab
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root_view= inflater.inflate(R.layout.fragment_result_detail_tab, container, false);
-        mUnbinder=ButterKnife.bind(this, root_view);
+        View root_view = inflater.inflate(R.layout.fragment_result_detail_tab, container, false);
+        mUnbinder = ButterKnife.bind(this, root_view);
         mResultDetailTabPresenter.refreshUI();
         return root_view;
     }
@@ -92,23 +84,24 @@ public class ResultDetailTabFragment extends BaseFrag implements ResultDetailTab
     /**
      * Repopulates UI with data elements
      * Sets up image as well
+     *
      * @param result
      */
     @Override
     public void populateUI(Result result) {
         mTitle.setText(result.getTitle());
-        mVotes.setText(result.getVoteAverage() + " "+getString(R.string.percentage));
-        mTotalVotes.setText(result.getVoteCount() + " "+getString(R.string.votes));
+        mVotes.setText(result.getVoteAverage() + " " + getString(R.string.percentage));
+        mTotalVotes.setText(result.getVoteCount() + " " + getString(R.string.votes));
         mDescription.setText(result.getOverview());
-        mReleaseDate.setText(getString(R.string.release)+" : " + mAppUtils.getFormattedDate(result.getReleaseDate()));
+        mReleaseDate.setText(getString(R.string.release) + " : " + mAppUtils.getFormattedDate(result.getReleaseDate()));
 
         //Created URL for image population with Glide
         StringBuilder images = new StringBuilder();
-        images.append(BuildConfig.IMG_BASE_URL+AppUtils.IMG_URL_EXTRA);
+        images.append(BuildConfig.IMG_BASE_URL + IMG_URL_EXTRA);
         images.append(result.getBackdropPath());
 
-        mAppLogger.d(TAG, "IMG:= "+images.toString());
-        loadImage(images.toString(),mImgMovie);
+        mAppLogger.d(TAG, "IMG:= " + images.toString());
+        loadImage(images.toString(), mImgMovie);
     }
 
     @Override

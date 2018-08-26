@@ -21,6 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static com.dev.movieapp.utils.AppConstants.RESULT_KEY;
+
 /**
  * A fragment representing a single Result detail screen.
  * This fragment is either contained in a {@link ResultListActivity}
@@ -61,7 +63,7 @@ public class ResultDetailFragment extends BaseFrag implements ResultDetailView {
         getInjectionComponent().inject(this);
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
-        mResult = bundle.getParcelable(AppUtils.RESULT_KEY);
+        mResult = bundle.getParcelable(RESULT_KEY);
         //Initiates Presenter object
         mResultDetailPresenter = new ResultDetailPresenter(mResult);
         mResultDetailPresenter.attach(this);

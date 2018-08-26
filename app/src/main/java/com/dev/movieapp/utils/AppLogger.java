@@ -2,6 +2,9 @@ package com.dev.movieapp.utils;
 
 import android.util.Log;
 
+/**
+ * Logger for messages
+ */
 public class AppLogger {
 
     public void e(String tag, String message) {
