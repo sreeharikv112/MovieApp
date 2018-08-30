@@ -25,12 +25,6 @@ public class SplashPresenterTest {
     @Mock
     SplashView mSplashView;
 
-    /*public final Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-
-    @Rule
-    public final ActivityTestRule<SplashActivity> splashActivityTestRule =
-            new ActivityTestRule<SplashActivity>(SplashActivity.class,true,true);*/
-
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);

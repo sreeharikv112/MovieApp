@@ -10,6 +10,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.dev.movieapp.R;
 import com.dev.movieapp.models.Result;
 import com.dev.movieapp.ui.activities.detail.ResultDetailActivity;
+import com.dev.movieapp.utils.AppConstants;
 import com.dev.movieapp.utils.AppUtils;
 
 import org.junit.After;
@@ -44,12 +45,12 @@ public class ResultDetailFragmentTest {
                     result.setVoteAverage(4.2);
                     result.setVoteCount(13);
                     result.setOverview("Movie Description");
-                    result.setReleaseDate("4-01-2018");
+                    result.setReleaseDate("2018-12-01");
                     Parcel parcel = Parcel.obtain();
                     result.writeToParcel(parcel,result.describeContents());
                     parcel.setDataPosition(0);
                     Result createdFromParcel = Result.CREATOR.createFromParcel(parcel);
-                    intent.putExtra(AppUtils.RESULT_KEY, createdFromParcel);
+                    intent.putExtra(AppConstants.RESULT_KEY, createdFromParcel);
                     return intent;
                 }
             };
@@ -59,7 +60,9 @@ public class ResultDetailFragmentTest {
         onView(withId(R.id.title)).check(matches(withText("Avengers Marvel")));
         onView(withId(R.id.result_detail)).check(matches(withText("Movie Description")));
         onView(withId(R.id.votes)).check(matches(withText("4.2"+ " "+targetContext.getString(R.string.percentage))));
-        onView(withId(R.id.releaseDate)).check(matches(withText(targetContext.getString(R.string.release)+" : " +"4-01-2018")));
+        onView(withId(R.id.releaseDate)).check(matches(withText(targetContext.getString(R.string.release)
+                + " : " + ("01 Dec 2018")
+        )));
         onView(withId(R.id.totalVotes)).check(matches(withText("13"+" "+targetContext.getString(R.string.votes))));
     }
 
