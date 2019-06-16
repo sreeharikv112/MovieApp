@@ -1,8 +1,8 @@
 package com.dev.movieapp.ui.fragments.detailfrag;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
+import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import com.dev.movieapp.ui.activities.detail.ResultDetailActivity;
 import com.dev.movieapp.ui.activities.landing.ResultListActivity;
 import com.dev.movieapp.ui.fragments.BaseFrag;
 import com.dev.movieapp.utils.AppUtils;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import javax.inject.Inject;
 

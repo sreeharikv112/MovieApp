@@ -43,7 +43,7 @@ public class AppUtils {
     /**
      * Returns formatted date
      *
-     * @param inputDate
+     * @param inputDate input data
      * @return
      */
     public String getFormattedDate(String inputDate) {

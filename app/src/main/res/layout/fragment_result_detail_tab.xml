@@ -14,7 +14,7 @@
             android:scaleType="fitXY"
             android:src="@mipmap/imdb_icon"
             />
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,5 +98,5 @@
             android:textColor="@android:color/darker_gray"
             />
         </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 </LinearLayout>

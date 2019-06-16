@@ -1,7 +1,7 @@
 package com.dev.movieapp.app;
 
 import android.app.Application;
-import android.arch.lifecycle.ProcessLifecycleOwner;
+import androidx.lifecycle.ProcessLifecycleOwner;
 import android.content.res.Configuration;
 
 import com.dev.movieapp.dipinject.components.ApplicationComponent;

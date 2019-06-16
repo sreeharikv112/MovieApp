@@ -2,16 +2,13 @@ package com.dev.movieapp.ui.activities.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
 
 import com.dev.movieapp.R;
 import com.dev.movieapp.ui.activities.BaseActivity;
 import com.dev.movieapp.ui.activities.landing.ResultListActivity;
 import com.dev.movieapp.ui.fragments.splash.SplashFragment;
 import com.dev.movieapp.utils.AppConstants;
-import com.dev.movieapp.utils.AppUtils;
-
-import javax.inject.Inject;
 
 /**
  * Splash Activity

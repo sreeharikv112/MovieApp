@@ -3,8 +3,8 @@ package com.dev.movieapp.ui.activities;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -15,10 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dev.movieapp.R;
 import com.dev.movieapp.app.MovieApp;
 import com.dev.movieapp.dipinject.components.InjectionSubComponent;
-import com.dev.movieapp.dipinject.modules.NetworkModule;
 import com.dev.movieapp.ui.uiinterfaces.AlertCallBack;
-
-import java.io.File;
 
 
 /**
